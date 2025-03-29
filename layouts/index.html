@@ -20,6 +20,54 @@
   }
 </style>
 
+<script>
+  window.addEventListener('load', () => {
+
+    document.querySelectorAll('.marquee a').forEach(link => {
+      link.addEventListener('click', () => {
+        const marqueeEls = document.querySelectorAll('.marquee-content');
+
+          const paused = document.visibilityState !== 'visible';
+
+          marqueeEls.forEach(el => {
+            el.style.animationPlayState = 'paused';
+          });
+        });
+  });
+
+  const marqueeEls = document.querySelectorAll('.marquee-content');
+
+  function pauseMarquee() {
+    marqueeEls.forEach(el => {
+      el.style.animationPlayState = 'paused';
+    });
+  }
+
+  function resumeMarquee() {
+    marqueeEls.forEach(el => {
+      el.style.animationPlayState = '';
+    });
+  }
+
+  document.addEventListener('visibilitychange', () => {
+    const paused = document.visibilityState !== 'visible';
+
+    setTimeout(() => {
+
+      marqueeEls.forEach(el => {
+        el.style.animationPlayState = paused ? 'paused' : 'running';
+      });
+    }, 600);
+  });
+
+  if (window.matchMedia('(min-width: 768px)').matches) {
+    window.addEventListener('blur', pauseMarquee);
+    window.addEventListener('focus', resumeMarquee);
+  }
+});
+
+</script>
+
 {{ end }}
 
 {{ define "sidebar-prefooter" }}

@@ -24,8 +24,10 @@ svg[data-bs-theme-value="dark"], svg[data-bs-theme-value="light"] {
   }
 }
 
-.marquee:hover .marquee-content {
-  animation-play-state: paused
+@media (min-width: 768px) {
+  .marquee:hover .marquee-content {
+    animation-play-state: paused
+  }
 }
 
 .marquee-item {
